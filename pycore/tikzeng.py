@@ -185,6 +185,24 @@ def to_SoftMax( name, s_filer=10, offset="(0,0,0)", to="(0,0,0)", width=1.5, hei
     };
 """
 
+# Full connection
+def to_FullConnection( name, n_nueron=1024, offset="(0,0,0)", to="(0,0,0)", width=3, height=3, depth=100, caption=" " ):
+    return r"""
+\pic[shift={ """+ offset +""" }] at """+ to +""" 
+    {RightBandedBox={
+        name="""+ name + """,
+        caption="""+ caption + """,
+        xlabel={{ """+ str(7) + """, }},
+        zlabel="""+ str(n_nueron) +""",
+        fill=\FcColor,
+        bandfill=\FcReluColor,
+        height="""+ str(height) +""",
+        width="""+ str(width) +""",
+        depth="""+ str(depth) +"""
+        }
+    };
+"""
+
 
 def to_connection( of, to):
     return r"""
