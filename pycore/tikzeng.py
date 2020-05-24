@@ -186,13 +186,13 @@ def to_SoftMax( name, s_filer=10, offset="(0,0,0)", to="(0,0,0)", width=1.5, hei
 """
 
 # Full connection
-def to_FullConnection( name, n_nueron=1024, offset="(0,0,0)", to="(0,0,0)", width=3, height=3, depth=100, caption=" " ):
+def to_FullConnection( name, s_filer=1, n_nueron=1024, offset="(0,0,0)", to="(0,0,0)", width=3, height=3, depth=100, caption=" " ):
     return r"""
 \pic[shift={ """+ offset +""" }] at """+ to +""" 
     {RightBandedBox={
         name="""+ name + """,
         caption="""+ caption + """,
-        xlabel={{ """+ str(7) + """, }},
+        xlabel={{ """+ str(s_filer) + """, }},
         zlabel="""+ str(n_nueron) +""",
         fill=\FcColor,
         bandfill=\FcReluColor,
@@ -207,6 +207,23 @@ def to_FullConnection( name, n_nueron=1024, offset="(0,0,0)", to="(0,0,0)", widt
 def to_connection( of, to):
     return r"""
 \draw [connection]  ("""+of+"""-east)    -- node {\midarrow} ("""+to+"""-west);
+"""
+
+def to_connection_end( of):
+    return r"""
+\draw [connection] ("""+of+"""-east)    -- node {\midarrow} ++(1.5,0,0);
+"""
+
+def to_connection_dot( of, to):
+    return r"""
+\draw [densely dashed]
+        ("""+of+"""-west)++(0, 1.5*.2, 1.5*.2) coordinate(a) -- ("""+to+"""-nearnortheast)
+        ("""+of+"""-west)++(0, 1.5*.2, 1.5*.2) coordinate(b) -- ("""+to+"""-nearsoutheast)
+        ("""+of+"""-west)++(0, 1.5*.2, 1.5*.2) coordinate(c) -- ("""+to+"""-farsoutheast)
+        ("""+of+"""-west)++(0, 1.5*.2, 1.5*.2) coordinate(d) -- ("""+to+"""-farnortheast)
+
+        (a)--(b)--(c)--(d)
+        ;
 """
 
 def to_skip( of, to, pos=1.25):
