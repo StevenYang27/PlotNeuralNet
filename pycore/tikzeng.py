@@ -48,7 +48,28 @@ def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", widt
         caption="""+ caption +r""",
         xlabel={{"""+ str(n_filer) +""", }},
         zlabel="""+ str(s_filer) +""",
+        ylabel="""+ str(s_filer) +""",
         fill=\ConvColor,
+        height="""+ str(height) +""",
+        width="""+ str(width) +""",
+        depth="""+ str(depth) +"""
+        }
+    };
+"""
+
+# Conv, relu
+def to_ConvRelu(name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=6, height=40, depth=40, opacity=0.2, caption=" "):
+    return r"""
+\pic[shift={ """+ offset +""" }] at """+ to +""" 
+    {RightBandedBox={
+        name="""+ name + """,
+        caption="""+ caption + """,
+        xlabel={{ """+ str(n_filer) + """, }},
+        zlabel="""+ str(s_filer) +""",
+        ylabel="""+ str(s_filer) +r""",
+        fill=\ConvColor,
+        bandfill=\ConvReluColor,
+        opacity="""+ str(opacity) +""",
         height="""+ str(height) +""",
         width="""+ str(width) +""",
         depth="""+ str(depth) +"""
